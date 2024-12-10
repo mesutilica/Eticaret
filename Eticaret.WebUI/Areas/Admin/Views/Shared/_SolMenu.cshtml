@@ -1,0 +1,73 @@
+﻿<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="/Admin">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Ana Ekran
+                </a>
+                <a class="nav-link" href="/Admin/AppUsers">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    Kullanıcı Yönetimi
+                </a>
+                <a class="nav-link" href="/Admin/Addresses">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    Adres Yönetimi
+                </a>
+                <a class="nav-link" href="/Admin/Brands">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-regular fa-copyright"></i>
+                    </div>
+                    Marka Yönetimi
+                </a>
+                <a class="nav-link" href="/Admin/Categories">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-list"></i>
+                    </div>
+                    Kategori Yönetimi
+                </a>
+                <a class="nav-link" href="/Admin/Products">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-barcode"></i>
+                    </div>
+                    Ürün Yönetimi
+                </a>
+                <a class="nav-link" href="/Admin/News">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    Kampanya ve Duyurular
+                </a>
+                <a class="nav-link" href="/Admin/Sliders">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    Slider Yönetimi
+                </a>
+
+                <a class="nav-link" href="/Admin/Contacts">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-regular fa-comments"></i>
+                    </div>
+                    İletişim Formları
+                </a>
+
+                <a class="nav-link" href="/Admin/Orders">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    Siparişler
+                </a>
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Hoşgeldin:</div>
+            @Context.User.Identity.Name
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,100 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Sipariş Detay";
+}
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalPrice) ₺
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AppUserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AppUserId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AppUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AppUser.Name)
+            @Html.DisplayFor(model => model.AppUser.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BillingAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BillingAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderState)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderState)
+        </dd>
+    </dl>
+    @if (Model.OrderLines.Any())
+    {
+        <table class="table table-sm table-hover">
+            <tr>
+                <th></th>
+                <th>Ürün</th>
+                <th>Fiyat</th>
+                <th>Miktar</th>
+                <th>Toplam</th>
+            </tr>
+            <tbody>
+                @foreach (var item2 in Model.OrderLines)
+                {
+                    <tr>
+                        <td>
+                            <img src="/Img/Products/@item2.Product.Image" alt="" height="37" />
+                        </td>
+                        <td>
+                            <a class="nav-link text-dark" href="/Products/Details/@item2.Product.Id">
+                                @item2.Product.Name
+                            </a>
+                        </td>
+                        <td>
+                            @item2.UnitPrice.ToString("c")
+                        </td>
+                        <td>
+                            @item2.Quantity
+                        </td>
+                        <td>
+                            @((item2.Quantity * item2.UnitPrice).ToString("c"))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> |
+    <a asp-action="Index">Listeye Dön</a>
+</div>

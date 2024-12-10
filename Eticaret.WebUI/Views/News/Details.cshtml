@@ -1,0 +1,16 @@
+﻿@model News
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="/Img/@Model.Image" alt="@Model.Name" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+        @Model.Description
+    </div>
+</div>

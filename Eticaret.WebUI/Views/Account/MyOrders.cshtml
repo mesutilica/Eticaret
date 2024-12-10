@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "Siparişlerim";
+}
+
+<h1>Siparişlerim</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                Sipariş Özeti
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderState)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice) TL
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @item.OrderLines.Count Ürün
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderState)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <table class="table table-sm">
+                        <tr>
+                            <th></th>
+                            <th>Ürün</th>
+                            <th>Fiyat</th>
+                            <th>Miktar</th>
+                            <th>Toplam</th>
+                        </tr>
+                        <tbody>
+                            @foreach (var item2 in item.OrderLines)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="/Img/Products/@item2.Product.Image" alt="" height="37" />
+                                    </td>
+                                    <td>
+                                        <a class="nav-link text-dark" href="/Products/Details/@item2.Product.Id">
+                                            @item2.Product.Name
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @item2.UnitPrice.ToString("c")
+                                    </td>
+                                    <td>
+                                        @item2.Quantity
+                                    </td>
+                                    <td>
+                                        @((item2.Quantity * item2.UnitPrice).ToString("c"))
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

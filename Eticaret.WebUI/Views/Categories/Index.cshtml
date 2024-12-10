@@ -1,0 +1,15 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="my-5">
+    <h1 class="text-center">@Model.Name</h1>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        @foreach (var item in Model.Products)
+        {
+            <partial name="_ProductView" model="item" />
+        }
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@using Eticaret.WebUI.ExtensionMethods
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Eticaret.WebUI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-evenly">
+                <form action="/Products" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input name="q" type="search" class="form-control" placeholder="Ürün Ara..." aria-label="Search">
+                </form>
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Anasayfa</a>
+                    </li>
+                    @await Component.InvokeAsync("Categories")
+                </ul>
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hesabım
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Account">Kullanıcı Bilgilerim</a></li>
+                            <li><a class="dropdown-item" href="/MyAddresses">Kayıtlı Adreslerim</a></li>
+                            <li><a class="dropdown-item" href="/Account/MyOrders">Siparişlerim</a></li>
+                            <li><a class="dropdown-item" href="/Account/">Değerlendirmelerim</a></li>
+                            <li class="text-center"><a class="btn btn-danger" href="/Account/SignOut">Oturumu Kapat</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Giriş Yap
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Account/SignIn">Giriş</a></li>
+                            <li><a class="dropdown-item" href="/Account/SignUp">Üye Ol</a></li>
+                        </ul>
+                    </div>
+                }
+                <div class="dropdown mx-3">
+                    <a class="nav-link text-dark" href="/Favorites">
+                        Favorilerim
+                    </a>
+                </div>
+                <div class="dropdown me-3">
+                    @{
+                        var cart = Context.Session.GetJson<Eticaret.Service.Concrete.CartService>("Cart");
+                        if (cart != null && cart.CartLines.Count > 0)
+                        {
+                            <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sepetim
+                                <span class="badge bg-danger text-white ms-1 rounded-pill">
+                                    @cart.CartLines.Count
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (var item in cart.CartLines)
+                                {
+                                    <li>
+                                        <a class="dropdown-item" href="/Products/Details/@item.Product.Id">
+                                            <img src="/Img/Products/@item.Product.Image" alt="" height="40" />
+                                            @item.Product.Name
+                                        </a>
+                                    </li>
+                                }
+                                <li class="text-center"><a class="btn btn-warning m-auto" href="/Cart">Sepete Git</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-dark" href="/Cart">
+                                Sepetim
+                            </a>
+                        }
+                    }
+                </div>
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">İletişim</a>
+            </div>
+        </div>
+    </nav>
+</header>

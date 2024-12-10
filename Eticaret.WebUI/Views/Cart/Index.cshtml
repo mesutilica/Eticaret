@@ -1,0 +1,107 @@
+﻿@model CartViewModel
+
+@{
+    ViewData["Title"] = "Sepetim";
+}
+
+<section class="container my-5">
+    <div class="text-center">
+        <h1 class="display-4">Sepetim</h1>
+    </div>
+    <div class="row">
+        @if (Model.CartLines.Any())
+        {
+            <div class="col-md-8">
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th></th>
+                            <th>Ürün</th>
+                            <th>Fiyat</th>
+                            <th>Miktar</th>
+                            <th>Toplam</th>
+                            <th></th>
+                        </tr>
+                        <tbody>
+                            @foreach (var item in Model.CartLines)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="/Img/Products/@item.Product.Image" alt="" height="37" />
+                                    </td>
+                                    <td>
+                                        <a class="nav-link text-dark" href="/Products/Details/@item.Product.Id">
+                                            @item.Product.Name
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @item.Product.Price.ToString("c")
+                                    </td>
+                                    <td>
+                                        @item.Quantity
+                                    </td>
+                                    <td>
+                                        @((item.Quantity * item.Product.Price).ToString("c"))
+                                    </td>
+                                    <td>
+                                        <form asp-action="Remove" asp-controller="Cart">
+                                            <input type="hidden" name="ProductId" value="@item.Product.Id" />
+                                            <button class="btn btn-sm btn-danger" type="submit">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <h4>Sepet Toplamı</h4>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>Aratoplam</td>
+                        <td>
+                            @Model.TotalPrice.ToString("c")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kargo</td>
+                        <td>
+                            @(Model.TotalPrice > 999 ? "Ücretsiz" : Model.CartLines.Any() ? "99₺" : "0₺")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sipariş Toplamı</th>
+                        <td>
+                            @(Model.TotalPrice > 999 ? Model.TotalPrice.ToString("c") : (Model.CartLines.Any() ? Model.TotalPrice + 99 : Model.TotalPrice.ToString("c")))
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="text-center">
+                    <a href="/" class="btn btn-danger">
+                        <i class="bi bi-cart me-1"></i> Alışverişe Devam Et
+                    </a>
+                    <a href="/Cart/Checkout" class="btn btn-success">
+                        <i class="bi bi-credit-card me-1"></i> Satın Al
+                    </a>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="container">
+                <div class="alert alert-warning my-5">
+                    <h3>Sepetinizde Ürün Bulunmamaktadır!</h3>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -8,6 +8,10 @@ namespace Eticaret.Data
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -21,9 +25,13 @@ namespace Eticaret.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=EticaretDb; Trusted_Connection=True; TrustServerCertificate=True;");
+            // local db
+            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=EticaretDb; Trusted_Connection=True; TrustServerCertificate=True;");
 
-            optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+            // free server
+            //
+
+            // optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
 
             base.OnConfiguring(optionsBuilder);
         }

@@ -7,13 +7,15 @@
             <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 @anaKategori.Name
             </a>
-
-            <ul class="dropdown-menu m-auto">
-                @foreach (var altKategori in Model.Where(c => c.ParentId == anaKategori.Id))
-                {
-                    <li><a class="dropdown-item" href="/Categories/Index/@altKategori.Id">@altKategori.Name</a></li>
-                }
-            </ul>
+            @if (Model.Where(c => c.ParentId == anaKategori.Id) is not null && Model.Where(c => c.ParentId == anaKategori.Id).Count() > 0)
+            {
+                <ul class="dropdown-menu m-auto">
+                    @foreach (var altKategori in Model.Where(c => c.ParentId == anaKategori.Id))
+                    {
+                        <li><a class="dropdown-item" href="/Categories/Index/@altKategori.Id">@altKategori.Name</a></li>
+                    }
+                </ul>
+            }
         </div>
     }
 }

@@ -21,7 +21,7 @@
                 {
                     <div class="dropdown">
                         <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hesabım
+                            <i class="bi bi-person-fill"></i> Hesabım
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/Account">Kullanıcı Bilgilerim</a></li>
@@ -36,7 +36,7 @@
                 {
                     <div class="dropdown">
                         <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Giriş Yap
+                            <i class="bi bi-person"></i> Giriş Yap
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/Account/SignIn">Giriş</a></li>
@@ -46,7 +46,17 @@
                 }
                 <div class="dropdown mx-3">
                     <a class="nav-link text-dark" href="/Favorites">
-                        Favorilerim
+                        @{
+                            var favorites = Context.Session.GetJson<List<Product>>("GetFavorites");
+                            if (favorites is not null && favorites.Count > 0)
+                            {
+                                <i class="bi bi-heart-fill"></i> @:Favorilerim (@favorites.Count)
+                            }
+                            else
+                            {
+                                <i class="bi bi-heart"></i> @:Favorilerim
+                            }
+                        }
                     </a>
                 </div>
                 <div class="dropdown me-3">
@@ -55,7 +65,7 @@
                         if (cart != null && cart.CartLines.Count > 0)
                         {
                             <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sepetim
+                                <i class="bi bi-cart-fill"></i> Sepetim
                                 <span class="badge bg-danger text-white ms-1 rounded-pill">
                                     @cart.CartLines.Count
                                 </span>
@@ -76,7 +86,7 @@
                         else
                         {
                             <a class="nav-link text-dark" href="/Cart">
-                                Sepetim
+                                <i class="bi bi-cart"></i> Sepetim
                             </a>
                         }
                     }

@@ -76,7 +76,7 @@
             </div>
         </div>
         <hr />
-        if (Model.Addresses is null)
+        if (Model.Addresses is null || Model.Addresses.Count == 0)
         {
             <div class="alert alert-secondary my-5">
                 <h5 class="text-danger">

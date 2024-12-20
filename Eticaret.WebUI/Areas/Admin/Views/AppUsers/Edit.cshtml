@@ -12,6 +12,7 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="UserGuid" />
             <input type="hidden" asp-for="CreateDate" />
+            <input type="hidden" asp-for="Password" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -31,11 +32,6 @@
                 <label asp-for="Phone" class="control-label"></label>
                 <input asp-for="Phone" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>

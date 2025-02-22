@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Iyzipay" Version="2.1.66" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,6 +30,13 @@
     <Folder Include="wwwroot\Img\Categories\" />
     <Folder Include="wwwroot\Img\Products\" />
     <Folder Include="wwwroot\Img\Slider\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_AccountLayout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
